@@ -1,0 +1,231 @@
+ドイツ語基本動詞(222 個)の内訳
+stage 0：前綴りの無い規則動詞 43 個
+◎ 規則動詞の過去分詞　ge 語幹 t　　例：wohnen
+wohnen　　　住む
+lernen　　　(語学などを)学ぶ
+spielen　　　（球技などを）する・遊ぶ
+suchen　　　捜す
+horen　　　聞く
+jobben　　　バイトする
+kaufen　　　買う
+schenken　　　～に～を贈る
+passen　　　～に合う
+glauben　　　思う・信じる
+brauchen　　　必要とする
+fragen　　　尋ねる
+fruhstucken　　　朝食を取る
+fehlen　　　欠席する
+grusen　　　あいさつする
+kochen　　　料理する
+leben　　　生きる・暮らす
+lachen　　　笑う
+legen　　　横たえる・横向きに置く
+stellen　　　立てる・縦向き(そのもの本来の向き)に置く
+malen　　　絵を描く
+meinen　　　思う
+parken　　　駐車する
+putzen　　　（ふいて）きれいにする
+rauchen　　　タバコを吸う
+reisen　　　旅行する
+sagen　　　言う
+schicken　　　～に～を送る
+schmecken　　　～の味がする・おいしい
+schneien　　　雪が降る
+setzen　　　据える・座らせる
+stimmen　　　合う・適合する
+tanzen　　　踊る
+zeigen　　　示す
+zahlen　　　払う
+zahlen　　　数える
+freuen　　　喜ばせる・喜ぶ
+teilen　　　分ける
+hoffen　　　期待する
+Katsumi Iwasaki 2006
+lieben　　　愛する
+wunschen　　　願う
+stage 1：前綴りのない規則動詞(発音上の変則/n 型動詞)17 個
+◎ 規則動詞の過去分詞　ge 語幹 et　　例：gearbeitet (発音上の変則)
+arbeiten　　　働く
+antworten　　　答える
+heiraten　　　結婚する
+kosten　　　(お金が)かかる
+mieten　　　借りる
+warten　　　待つ
+offnen　　　開ける
+rechnen　　　計算する
+atmen　　　呼吸する
+regnen　　　雨が降る
+◎ n 型動詞も普通の規則動詞の過去分詞と同じ作り方で良い。
+ge 語幹 t　　例：gekummert
+kummern　　　気にかける
+dauern　　　(時間が)かかる
+feiern　　　祝う
+angeln　　　釣りをする
+sammeln　　　集める
+wandern　　　山歩きをする
+stage 2：前綴りのない不規則動詞 67 個
+kommen 　来る　gekommen
+trinken 　飲む　getrunken
+essen 　食べる　gegessen
+fahren 　（乗り物で）行く　gefahren
+gehen (歩いて)行く　gegangen
+nehmen　　　取る　　　genommen
+singen　　　歌う,gesungen
+finden　　　～を～と思う・見つける　　　gefunden
+stehen　　　立っている・似合う　　　gestanden
+beginnen　　　始める　　　begonnen
+bleiben　　　留まる　　　geblieben
+brechen　　　折る・破る　　　gebrochen
+liegen　　　横たわっている・ある　　　gelegen
+sitzen　　　座っている　　　gesessen
+lesen　　　読書する　　　gelesen
+bringen　　　持ってくる　　　gebracht
+denken　　　考える　　　gedacht
+Katsumi Iwasaki 2006
+fallen　　　落ちる　　　gefallen
+schreiben　　　書く　　　geschrieben
+geben　　　与える　　　gegeben
+helfen　　　～に手助けする　　　geholfen
+schlafen　　　眠る　　　geschlafen
+halten　　　保持する・止まる　　　gehalten
+rufen　　　呼ぶ　　　gerufen
+schwimmen　　　泳ぐ　　　geschwommen
+treffen　　　出会う・当たる　　　getroffen
+tun　　　する　　　getan
+sterben　　　死ぬ　　　gestorben
+wissen　　　知っている　　　gewusst
+waschen　　　洗う　　　gewaschen
+schreien　　　叫ぶ　　　geschrien
+brennen　　　燃やす　　　gebrannt
+leihen　　　貸す　　　geliehen
+sehen　　　見る　　　gesehen
+schliesen　　　閉める　　　geschlossen
+sprechen　　　話す　　　gesprochen
+schlagen　　　打つ・なぐる　　　geschlagen
+schiesen　　　撃つ・射る　　　geschossen
+stehlen　　　盗む　　　gestohlen
+tragen　　　運ぶ・身につけている　　　getragen
+bitten　　　願う・頼む　　　gebeten
+fliegen　　　飛ぶ　　　geflogen
+heisen　　　～という名である　　　geheisen
+kennen　　　知っている　　　gekannt
+laufen　　　走る・歩く　　　gelaufen
+ziehen　　　引っ張る・移動する　　　gezogen
+schneiden　　　切る　　　geschnitten
+wollen（動詞的に使用の場合）　　　gewollt
+konnen（動詞的に使用の場合）　　　gekonnt
+mussen（動詞的に使用の場合）　　　gemusst
+durfen（動詞的に使用の場合）　　　gedurft
+sollen（動詞的に使用の場合）　　　gesollt
+mogen（動詞的に使用の場合）　　　gemocht
+wollen（助動詞）　　　wollen
+konnen（助動詞）　　　konnen
+mussen（助動詞）　　　mussen
+durfen（助動詞）　　　durfen
+sollen（助動詞）　　　sollen
+mogen（助動詞）　　　mogen
+werden（受け身の助動詞）　　　worden
+werden　　　geworden
+sein　　　gewesen
+Katsumi Iwasaki 2006
+haben　　　gehabt
+spazieren　　　gehen　　　散歩に行く　　　spazieren gegangen
+einkaufen　　　gehen　　　買い物に行く　　　einkaufen gegangen
+Rad　　　fahren　　　サイクリングする　　　Rad gefahren
+stage　　　3：-ieren 型または非分離動詞の規則動詞 37 個
+erreichen　　　到達・達成する　　　erreicht
+eroffnen　　　(口座などを)開く　　　eroffnet
+besuchen　　　訪問する　　　besucht
+versuchen　　　試みる　　　versucht
+gehoren　　　～に属する　　　gehort
+versammeln　　　集める・集まる　　　versammelt
+bestellen　　　注文する　　　bestellt
+erklaren　　　説明する　　　erklart
+verbrauchen　　　消費する　　　verbraucht
+verkaufen　　　売る　　　verkauft
+vermieten　　　貸す　　　vermietet
+verpassen　　　乗り遅れる　　　verpasst
+telefonieren　　　電話で話をする　　　telefoniert
+funktionieren　　　機能する　　　funktioniert
+studieren　　　（専門的に）勉強する　　　studiert
+fotografieren　　　写真を撮る　　　fotografiert
+probieren　　　試す・試食する　　　probiert
+reparieren　　　修繕する　　　repariert
+spazieren　　　散歩する　　　spaziert
+buchstabieren　　　綴りを言う　　　buchstabiert
+passieren　　　起こる　　　passiert
+bezahlen　　　払う　　　bezahlt
+benutzen　　　使う　　　benutzt
+besichtigen　　　見学する　　　besichtigt
+erledigen　　　かたづける　　　erledigt
+uberlegen　　　熟考する　　　uberlegt
+verstecken　　　隠す・隠れる　　　versteckt
+erkalten　　　風邪を引く　　　erkaltet
+verspaten　　　遅刻する　　　verspatet
+uberholen　　　追い越す　　　uberholt
+bedeuten　　　意味する　　　bedeutet
+verabschieden　　　別れを告げる　　　verabschiedet
+beobachten　　　観察する　　　beobachtet
+verdienen　　　稼ぐ　　　verdient
+kopieren　　　コピーする　　　kopiert
+unterrichten　　　授業をする　　　unterrichtet
+stage　　　4：非分離動詞の不規則動詞 14 個
+Katsumi Iwasaki 2006
+verstehen　　　理解する　　　verstanden
+bekommen　　　もらう　　　bekommen
+gefallen　　　～に気に入る　　　gefallen
+vergessen　　　忘れる　　　vergessen
+besprechen　　　～について話す　　　besprochen
+beraten　　　～について相談する　　　beraten
+verraten　　　こっそり教える・裏切る　　　verraten
+entsprechen　　　～に一致する・相当する　　　entsprochen
+empfinden　　　感じる　　　empfunden
+unterschreiben　　　署名する　　　unterschrieben
+bestehen　　　合格する　　　bestanden
+besitzen　　　所有する　　　besessen
+verlieren　　　失う　　　verloren
+stage　　　5：分離動詞の規則動詞 14 個
+ankreuzen　　　チェックを入れる　　　angekreuzt
+anmachen　　　スイッチを入れる　　　angemacht
+anprobieren　　　試着する　　　anprobiert
+aufraumen　　　部屋を片付ける　　　aufgeraumt
+ausfullen　　　記入する　　　ausgefullt
+einkaufen　　　買い物する　　　eingekauft
+aufmachen　　　開く　　　aufgemacht
+zumachen　　　閉じる　　　zugemacht
+vorbereiten　　　準備・用意する　　　vorbereitet
+abholen　　　連れてくる・取ってくる　　　abgeholt
+umtauschen　　　交換する　　　umgetauscht
+anmelden　　　申し込む　　　angemeldet
+aufpassen　　　注意する　　　aufgepasst
+stage　　　6：分離動詞の不規則動詞 30 個
+aufstehen　　　起床する　　　aufgestanden
+anrufen　　　電話をかける　　　angerufen
+ankommen　　　到着する　　　angekommen
+abfahren　　　出発する　　　abgefahren
+einsteigen　　　乗車する　　　eingestiegen
+aussteigen　　　降車する　　　ausgestiegen
+umsteigen　　　乗り換える　　　umgestiegen
+zuruckkommen　　　戻ってくる　　　zuruckgekommen
+zurucknehmen　　　撤回する　　　zurukgenommen
+zuruckgeben　　　返却する　　　zuruckgegeben
+anziehen　　　服を着る・引きつける　　　angezogen
+ausziehen　　　脱ぐ　　　ausgezogen
+Katsumi Iwasaki 2006
+eintragen　　　登録・記入する　　　eingetragen
+angeben　　　述べる　　　angegeben
+ausgeben　　　支出する　　　ausgegeben
+aufgeben　　　あきらめる　　　aufgegeben
+aussehen　　　～のように見える　　　anussehen
+umziehen　　　引っ越す　　　umgezogen
+anfangen　　　始める・始まる　　　angefangen
+weitergehen　　　続行する・先へ行く　　　weitergegangen
+anbieten　　　提供する　　　angeboten
+ausfallen　　　中止になる　　　ausgefallen
+fernsehen　　　テレビを見る　　　ferngesehen
+mitbringen　　　持ってくる　　　mitgebracht
+mitkommen　　　一緒に来る　　　mitgekommen
+mitnehmen　　　持って行く　　　mitgenommen
+einladen　　　招待する　　　eingeladen
+einschlafen　　　眠り込む　　　eingeschlafen
+aufwachsen　　　成長する　　　aufgewachsen
