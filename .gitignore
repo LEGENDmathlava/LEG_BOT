@@ -1,3 +1,6 @@
 legbot_unchi.py
 **/__pycache__
 ECHO_FLOWER
+my_command.py
+my_commands/LEG.py
+my_commands/in_command.py
