@@ -46,8 +46,13 @@ async def on_message(message):
             print(chr(7))
             print(chr(7))
             if message.author.id==552020060449931284:
-              await message.channel.send('10分ですね')
-    await my_command(message)
+                await message.channel.send('10分ですね')
+    try:
+        await my_command(message)
+    except IndexError:
+        print("=============IndexError=============")
+        print(message.content)
+        print("====================================")
     if 'ECHO_FLOWER' not in message.content:
         f = open('ECHO_FLOWER', mode='w')
         f.write(message.content)
