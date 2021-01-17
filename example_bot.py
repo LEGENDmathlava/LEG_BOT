@@ -69,10 +69,39 @@ async def on_ready():
 
 @client.event
 async def on_typing(channel, user, when):
-    print('test')
     if channel.id == 740114205444931594:
-        print('test')
         await channel.send(user.mention+'\nこんにちわ！！！！！')
-
+        print(channel.guild)
+    if channel.id == 740198572435308635:
+        await channel.send(user.mention+'\n荒らすな')
+        await channel.send(user.mention+'\n荒らすな')
+        await channel.send(user.mention+'\n荒らすな')
+        await channel.send(user.mention+'\n荒らすな')
+        await channel.send(user.mention+'\n荒らすな')
+        await channel.send(user.mention+'\n荒らすな')
+        await channel.send(user.mention+'\n荒らすな')
+        await channel.send(user.mention+'\n荒らすな')
+        await channel.send(user.mention+'\n荒らすな')
+        await channel.send(user.mention+'\n荒らすな')
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
+
+@client.event
+async def on_guild_channel_create(channel):
+    if channel.guild.id == 739882359649992714:
+        await channel.send(channel.mention+'に一番乗り！！')
+
+@client.event
+async def on_guild_channel_delete(channel):
+    if channel.guild.id == 739882359649992714:
+        channel = client.get_channel(740198572435308635)
+        await channel.send(user.name+'を返せ！！')
+        await channel.send(user.name+'を返せ！！')
+        await channel.send(user.name+'を返せ！！')
+        await channel.send(user.name+'を返せ！！')
+        await channel.send(user.name+'を返せ！！')
+        await channel.send(user.name+'を返せ！！')
+        await channel.send(user.name+'を返せ！！')
+        await channel.send(user.name+'を返せ！！')
+        await channel.send(user.name+'を返せ！！')
+        await channel.send(user.name+'を返せ！！')
