@@ -67,5 +67,12 @@ async def on_reaction_add(reaction, user):
 async def on_ready():
     print('on_ready')
 
+@client.event
+async def on_typing(channel, user, when):
+    print('test')
+    if channel.id == 740114205444931594:
+        print('test')
+        await channel.send(user.mention+'\nこんにちわ！！！！！')
+
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
