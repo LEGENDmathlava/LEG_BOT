@@ -14,6 +14,7 @@ print(chr(7))
 
 from legbot_unchi import *
 from my_command import my_command
+from reaction_command import reaction_command
 
 # 起動時に動作する処理
 @client.event
@@ -47,12 +48,7 @@ async def on_message(message):
             print(chr(7))
             if message.author.id==552020060449931284:
                 await message.channel.send('10分ですね')
-    try:
-        await my_command(message)
-    except IndexError:
-        print("=============IndexError=============")
-        print(message.content)
-        print("====================================")
+    await my_command(message)
     if 'ECHO_FLOWER' not in message.content:
         f = open('ECHO_FLOWER', mode='w')
         f.write(message.content)
@@ -61,7 +57,7 @@ async def on_message(message):
 
 @client.event
 async def on_reaction_add(reaction, user):
-    print('test2')
+    await reaction_command(reaction, user)
 
 @client.event
 async def on_ready():
