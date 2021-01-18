@@ -68,14 +68,7 @@ async def on_typing(channel, user, when):
     if channel.id == 740114205444931594:
         await channel.send(user.mention+'\nこんにちわ！！！！！')
         print(channel.guild)
-    if channel.id == 740198572435308635:
-        await channel.send(user.mention+'\n荒らすな')
-        await channel.send(user.mention+'\n荒らすな')
-        await channel.send(user.mention+'\n荒らすな')
-        await channel.send(user.mention+'\n荒らすな')
-        await channel.send(user.mention+'\n荒らすな')
-        await channel.send(user.mention+'\n荒らすな')
-        await channel.send(user.mention+'\n荒らすな')
+    if channel.id == 740198572435308635 and not user.bot:
         await channel.send(user.mention+'\n荒らすな')
         await channel.send(user.mention+'\n荒らすな')
         await channel.send(user.mention+'\n荒らすな')
