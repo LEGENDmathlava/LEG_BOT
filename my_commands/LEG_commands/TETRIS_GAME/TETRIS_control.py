@@ -3,6 +3,7 @@ import os
 from random import randrange
 import time
 
+now_preparing_players={}
 blocks=['    \n oo \n oo \n    ', ' o  \n o  \n o  \n o  ', '    \n o  \n oo \n o  ', '    \n oo \n  o \n  o ', '    \n  o \n oo \n o  ', '    \n o  \n oo \n  o ', '    \n    \n    \n    ']
 async def GAME_PREPARE(message):
     global blocks
@@ -26,20 +27,22 @@ async def GAME_PREPARE(message):
     embed.add_field(name='Score', value=123)
     embed.set_author(name=message.author.name, icon_url=message.author.avatar_url)
     embed_message = await message.channel.send(embed=embed)
+    now_preparing_players[message.author.id] = embed_message
     await embed_message.add_reaction('▶️')
     await embed_message.add_reaction('🗑️')
 
 async def GAME_START(message, user):
-    while True:
+    while True:    
         try:
             await paint(message, user)
             life = await auto_fall(message, user)
             if not life:
                 await GAME_OVER(message, user)
-                await message.clear_reactions()
+                if message.author.permissions_in(message.channel).manage_messages:
+                    await message.clear_reactions()
                 await message.add_reaction('🗑️')
-                from my_commands.LEG_commands.TETRIS import now_playing_players
-                now_playing_players.discard(user.id)
+                global now_preparing_players
+                now_preparing_players.pop(user.id)
                 return
             for _ in range(100):
                 time.sleep(0.01)
@@ -184,6 +187,8 @@ async def move_fall(message, user):
     split_block = list(map(list, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     b = True
+    if block_type == 6:
+            return
     while b:
         block_y += 1
         for y in range(4):
@@ -311,10 +316,11 @@ async def auto_fall(message, user):
                     forward = split_block[y][x]
                     if forward == 'o' and back == ' ':
                         field[block_y + y][4 + block_x + x] = 'o'
-        field_write(field, next1, 0, 0, 0, next2, next3, next4, randrange(0, 6), stock, score, user)
+        field_write(field, 6, 0, 0, 0, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
     if not b:
         await lines_clear(message, user)
+        await next(message, user)
         return is_alive(user)
     return True
 
@@ -356,9 +362,9 @@ def field_write(field, block_type, block_y, block_x, block_angle, next1, next2, 
         f.write(str(score)+'\n')
 
 async def exit_game(message, user):
-    from my_commands.LEG_commands.TETRIS import now_playing_players
+    global now_preparing_players
     await message.delete()
-    now_playing_players.discard(user.id)
+    now_preparing_players.pop(user.id)
 
 def is_alive(user):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
@@ -451,4 +457,24 @@ async def lines_clear(message, user):
                     field[z][x] = field[z-1][x]
             field[0] = list('x          x\n')
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
+    await paint(message, user)
+
+async def next(message, user):
+    with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
+        field = []
+        for _ in range(21):
+            field.append(list(f.readline()))
+        block_type = int(f.readline())
+        block_y = int(f.readline())
+        block_x = int(f.readline())
+        block_angle = int(f.readline())
+        next1 = int(f.readline())
+        next2 = int(f.readline())
+        next3 = int(f.readline())
+        next4 = int(f.readline())
+        stock = int(f.readline())
+        score = int(f.readline())
+    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = block_rot(split_block, block_angle)
+    field_write(field, next1, 0, 0, 0, next2, next3, next4, randrange(0, 6), stock, score, user)
     await paint(message, user)

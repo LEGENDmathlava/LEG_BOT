@@ -56,7 +56,16 @@ async def on_message(message):
     
 
 @client.event
-async def on_reaction_add(reaction, user):
+async def on_raw_reaction_add(payload):
+    channel = client.get_channel(payload.channel_id)
+    message = await channel.fetch_message(payload.message_id)
+    emoji = payload.emoji
+    reactions = message.reactions
+    for r in reactions:
+        if r.emoji == emoji.name:
+            reaction = r
+            break
+    user = client.get_user(payload.user_id)
     await reaction_command(reaction, user)
 
 @client.event
