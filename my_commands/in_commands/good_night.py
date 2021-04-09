@@ -9,4 +9,3 @@ async def good_night(message):
     await message.add_reaction(chr(0x1F1FA))
     await message.add_reaction(chr(0x1F1F2))
     await message.add_reaction(chr(0x1F1EE))
-    sys.exit()

@@ -4,21 +4,21 @@ from random import randrange
 import time
 
 now_preparing_players={}
-blocks=['    \n oo \n oo \n    ', ' o  \n o  \n o  \n o  ', '    \n o  \n oo \n o  ', '    \n oo \n  o \n  o ', '    \n  o \n oo \n o  ', '    \n o  \n oo \n  o ', '    \n    \n    \n    ']
+blocks=['    \n oo \n oo \n    ', ' o  \n o  \n o  \n o  ', '    \n o  \n oo \n o  ', '    \n oo \n o  \n o  ', '    \n oo \n  o \n  o ', '    \n  o \n oo \n o  ', '    \n o  \n oo \n  o ', '    \n    \n    \n    ']
 async def GAME_PREPARE(message):
     global blocks
     os.makedirs('my_commands/LEG_commands/TETRIS_GAME', exist_ok=True)
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(message.author.id)+'.txt', mode='w') as f:
         f.write('x          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nx          x\nxxxxxxxxxxxx\n')
-        f.write(str(randrange(0, 6))+'\n') # 種類
+        f.write(str(randrange(0, 7))+'\n') # 種類
         f.write('0\n') # 相対y座標
         f.write('0\n') # 相対x座標
         f.write('0\n') # 角度
-        f.write(str(randrange(0, 6))+'\n') # next1
-        f.write(str(randrange(0, 6))+'\n') # next2
-        f.write(str(randrange(0, 6))+'\n') # next3
-        f.write(str(randrange(0, 6))+'\n') # next4
-        f.write('6\n') # stock
+        f.write(str(randrange(0, 7))+'\n') # next1
+        f.write(str(randrange(0, 7))+'\n') # next2
+        f.write(str(randrange(0, 7))+'\n') # next3
+        f.write(str(randrange(0, 7))+'\n') # next4
+        f.write('7\n') # stock
         f.write('0\n') # score
     embed = discord.Embed(title='TETRIS('+str(message.author.id)+')', description='STAND BY')
     embed.add_field(name='Stock', value='```'+blocks[2]+'```', inline=False)
@@ -187,8 +187,8 @@ async def move_fall(message, user):
     split_block = list(map(list, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     b = True
-    if block_type == 6:
-            return
+    if block_type == 7:
+        return
     while b:
         block_y += 1
         for y in range(4):
@@ -273,8 +273,8 @@ async def stock(message, user):
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    if stock == 6:
-        field_write(field, next1, 0, 0, 0, next2, next3, next4, randrange(0, 6), block_type, score, user)
+    if stock == 7:
+        field_write(field, next1, 0, 0, 0, next2, next3, next4, randrange(0, 7), block_type, score, user)
     else:
         field_write(field, stock, 0, 0, 0, next1, next2, next3, next4, block_type, score, user)
     await paint(message, user)
@@ -316,7 +316,7 @@ async def auto_fall(message, user):
                     forward = split_block[y][x]
                     if forward == 'o' and back == ' ':
                         field[block_y + y][4 + block_x + x] = 'o'
-        field_write(field, 6, 0, 0, 0, next1, next2, next3, next4, stock, score, user)
+        field_write(field, 7, 0, 0, 0, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
     if not b:
         await lines_clear(message, user)
@@ -476,5 +476,5 @@ async def next(message, user):
         score = int(f.readline())
     split_block = list(map(list, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
-    field_write(field, next1, 0, 0, 0, next2, next3, next4, randrange(0, 6), stock, score, user)
+    field_write(field, next1, 0, 0, 0, next2, next3, next4, randrange(0, 7), stock, score, user)
     await paint(message, user)

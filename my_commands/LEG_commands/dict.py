@@ -55,10 +55,18 @@ joyodict = setJoyoDict()
 unihandict = setUniHanDict()
 
 async def char_NAME(m, message):
-    if len(m) < 3:
-        await message.channel.send('文字を一つ以上必要です')
+    if message.reference:
+        message2 = await message.channel.fetch_message(message.reference.message_id)
+        if message2.content == '':
+            await message.channel.send('文字を一つ以上必要です')
+            return
+        my_str = message2.content
+    else:
+        if len(m) < 3:
+            await message.channel.send('文字を一つ以上必要です')
+            return
+        my_str = message.content[message.content.find(m[2], message.content.find(m[1])+5):]
     s=''
-    my_str = message.content[message.content.find(m[2], message.content.find(m[1])+5):]
     for ss in my_str:
         k = ord(ss)
         if chardict[k] == None:
@@ -95,8 +103,18 @@ async def RAND_CHAR(m, message):
 
 
 async def n_char_NAME(m, message):
+    if message.reference:
+        message2 = await message.channel.fetch_message(message.reference.message_id)
+        if message2.content == '':
+            await message.channel.send('文字を一つ以上必要です')
+            return
+        my_str = message2.content
+    else:
+        if len(m) < 3:
+            await message.channel.send('文字を一つ以上必要です')
+            return
+        my_str = message.content[message.content.find(m[2], message.content.find(m[1])+5):]
     s=''
-    my_str = message.content[message.content.find(m[2], message.content.find(m[1])+5):]
     for ss in my_str:
         k = ord(ss)
         if chardict[k] == None:
