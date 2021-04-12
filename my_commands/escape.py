@@ -1,5 +1,7 @@
 #escape
 async def escape(m, message):
+    if message.author.bot:
+        return
     if message.reference:
         message2 = await message.channel.fetch_message(message.reference.message_id)
         s = message2.content
