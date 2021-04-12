@@ -8,7 +8,5 @@ async def escape(m, message):
             if ch.isascii() and not ch.isalnum() and ch != ' ' and ch != '\n':
                 escape_string += '\\'
             escape_string += ch
-        if len(escape_string) <= 2000:
-            await message.channel.send(escape_string)
-        else:
+        if escape_string != '': 
             await message.channel.send(escape_string[:2000])
