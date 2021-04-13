@@ -3,6 +3,7 @@
 
 import discord
 import time
+from typing import Dict
 
 async def brainfuck(message:discord.Message):
     print('========brain f*ck========')
@@ -88,13 +89,13 @@ async def brainfuck(message:discord.Message):
         source_ptr += 1
         if source_ptr >= len(source):
             break
-        await paint(embed_message, source, source_ptr, mem, mem_ptr, step, input_string, output_string, True)
-    await paint(embed_message, source, source_ptr, mem, mem_ptr, step, input_string, output_string, False)
+        await paint(message, embed_message, source, source_ptr, mem, mem_ptr, step, input_string, output_string, True)
+    await paint(message, embed_message, source, source_ptr, mem, mem_ptr, step, input_string, output_string, False)
     if bool(output_string):
         await message.channel.send(output_string)
     print('========----------========')
 
-async def paint(message, source, source_ptr, mem, mem_ptr, step, input_string, output_string, flag):
+async def paint(message:discord.Message, embed_message:discord.Message, source:str, source_ptr:int, mem:Dict[int, int], mem_ptr:int, step:int, input_string:str, output_string:str, flag:bool):
     description = 'running' if flag else 'end'
     for _ in range(100):
         time.sleep(0.01)
@@ -107,12 +108,12 @@ async def paint(message, source, source_ptr, mem, mem_ptr, step, input_string, o
     embed.add_field(name='input_buffer', value='```\n'+input_string[:1016]+'\n```', inline=False)
     embed.add_field(name='output_buffer', value='```\n'+output_string[-1016:]+'\n```', inline=False)
     embed.set_author(name=message.author.name, icon_url=message.author.avatar_url)
-    await message.edit(embed=embed)
+    await embed_message.edit(embed=embed)
 
-def source_extract(source, source_ptr):
+def source_extract(source:str, source_ptr:int)->str:
     return (' '*13 + source + ' '*14)[source_ptr:27+source_ptr]
 
-def mem_extract(mem, mem_ptr):
+def mem_extract(mem:Dict[int, int], mem_ptr:int)->str:
     s=''
     for i in range(mem_ptr-4, mem_ptr+5):
         if i not in mem:

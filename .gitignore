@@ -7,3 +7,4 @@ my_commands/LEG.py
 my_commands/in_command.py
 my_commands/regex_command.py
 my_commands/LEG_commands/TETRIS_GAME/TETRIS*.txt
+my_commands/LEG_commands/TEST_GAME/TESTGAME*.txt
