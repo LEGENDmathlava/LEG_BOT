@@ -1,4 +1,5 @@
 #aaaaa
 #'ﾌﾞﾘﾌﾞﾘﾌﾞﾘﾌﾞﾘｭﾘｭﾘｭﾘｭﾘｭﾘｭﾌﾞﾂﾁﾁﾌﾞﾌﾞﾌﾞﾁﾁﾁﾁﾌﾞﾘﾘｲﾘﾌﾞﾌﾞﾌﾞﾌﾞｩｩｩｩｯｯｯ'
-async def aaaaa(message):
+import discord
+async def aaaaa(message:discord.Message):
     await message.channel.send('うるせぇ')

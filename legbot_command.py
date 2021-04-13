@@ -1,7 +1,7 @@
 import discord
 from legbot_LEG import *
 
-async def legbot_command(message):
+async def legbot_command(message:discord.Message):
     i
     if message.author.bot:
         return

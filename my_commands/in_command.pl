@@ -24,7 +24,7 @@ foreach my $command_module_file (@command_module_files){
   close IN;
 }
 open FH, '>', "my_commands/in_command.py";
-print FH "#in_command\n";
+print FH "#in_command\nimport discord\n";
 foreach my $command_module_file (@command_module_files){
   my $command_module = $command_module_file;
   $command_module =~ s/\//./g;
@@ -32,7 +32,7 @@ foreach my $command_module_file (@command_module_files){
   print FH "from $command_module import $file2function{$command_module_file} \n";
 }
 
-print FH "async def in_command(message):\n";
+print FH "async def in_command(message:discord.Message):\n";
 foreach my $function (@functions){
   my $str2 = $func2str{$function};
   print FH "    if ${str2} in message.content:\n";

@@ -24,7 +24,7 @@ foreach my $command_module_file (@command_module_files){
   close IN;
 }
 open FH, '>', "reaction_command.py";
-print FH "#reaction_command\n";
+print FH "#reaction_command\nimport discord\nfrom typing import Union\n";
 foreach my $command_module_file (@command_module_files){
   my $command_module = $command_module_file;
   $command_module =~ s/\//./g;
@@ -32,7 +32,7 @@ foreach my $command_module_file (@command_module_files){
   print FH "from $command_module import $file2function{$command_module_file} \n";
 }
 
-print FH "async def reaction_command(reaction, user):\n";
+print FH "async def reaction_command(reaction:discord.Reaction, user:Union[discord.Member, discord.User]):\n";
 foreach my $function (@functions){
   my $str2 = $func2str{$function};
   print FH "    if reaction.emoji == ${str2}:\n";

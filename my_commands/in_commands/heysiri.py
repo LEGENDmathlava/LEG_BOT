@@ -1,4 +1,5 @@
 #heysiri
 #'Hey Siri'
-async def heysiri(message):
+import discord
+async def heysiri(message:discord.Message):
     await message.channel.send('お呼びでしょうか')

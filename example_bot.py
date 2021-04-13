@@ -6,6 +6,8 @@ print(chr(7))
 import discord
 import random
 import sys
+import datetime
+from typing import Union
 
 print(chr(7))
 print(chr(7))
@@ -26,7 +28,7 @@ b = False
 # メッセージ受信時に動作する処理
 num=random.randrange(100)+1000
 @client.event
-async def on_message(message):
+async def on_message(message:discord.Message):
     if message.author.id == 739586615487496274:
         return
     if message.channel.id == 534027499252744202:
@@ -59,7 +61,7 @@ async def on_message(message):
     
 
 @client.event
-async def on_raw_reaction_add(payload):
+async def on_raw_reaction_add(payload:discord.RawMessageDeleteEvent):
     channel = client.get_channel(payload.channel_id)
     message = await channel.fetch_message(payload.message_id)
     emoji = payload.emoji
@@ -76,7 +78,7 @@ async def on_ready():
     print('on_ready')
 
 @client.event
-async def on_typing(channel, user, when):
+async def on_typing(channel:discord.abc.Messageable, user:Union[discord.User, discord.Member], when:datetime.datetime):
     if channel.id == 740114205444931594:
         await channel.send(user.mention+'\nこんにちわ！！！！！')
         print(channel.guild)
@@ -87,17 +89,17 @@ async def on_typing(channel, user, when):
 
 
 @client.event
-async def on_guild_channel_create(channel):
+async def on_guild_channel_create(channel:discord.abc.GuildChannel):
     print('test34')
     if channel.guild.id == 739882359649992714 or channel.guild.id == 378912400113664000:
         await channel.send(channel.mention+'に一番乗り！！')
 
 @client.event
-async def on_guild_channel_update(before, after):
+async def on_guild_channel_update(before:discord.abc.GuildChannel, after:discord.abc.GuildChannel):
     print('test43')
 
 @client.event
-async def on_guild_channel_delete(channel):
+async def on_guild_channel_delete(channel:discord.abc.GuildChannel):
     if channel.guild.id == 739882359649992714:
         channel2 = client.get_channel(804573278937153596)
         await channel2.send(channel.name+'を返せ！！')

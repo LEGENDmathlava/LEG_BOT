@@ -4,7 +4,7 @@
 import discord
 import time
 
-async def brainfuck(message):
+async def brainfuck(message:discord.Message):
     print('========brain f*ck========')
     temp = message.content.split('\n# INPUT\n')
     source = temp[0]

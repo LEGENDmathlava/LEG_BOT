@@ -1,5 +1,7 @@
 #ECHO_FLOWER
-async def ECHO_FLOWER(m, message):
+import discord
+from typing import List
+async def ECHO_FLOWER(m:List[str], message:discord.Message):
     f = open('ECHO_FLOWER')
     s=''
     line = f.readline()

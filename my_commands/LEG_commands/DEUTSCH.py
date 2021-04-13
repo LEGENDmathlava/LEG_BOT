@@ -1,6 +1,8 @@
 #DEUTSCH
+import discord
 import random
-def setDEUTSCH():
+from typing import List
+def setDEUTSCH()->List[str]:
     f = open('my_commands/LEG_commands/DEUTSCH/DEUTSCH.txt')
     linelist = []
     line = f.readline()

@@ -1,6 +1,7 @@
 #poponta
 #chr(129300)
-async def poponta(message):
+import discord
+async def poponta(message:discord.Message):
     if message.author.bot:
         return
     await message.channel.send(chr(129300))

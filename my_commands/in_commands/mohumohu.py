@@ -1,6 +1,7 @@
 #mohumohu
 #'もふもふ'
-async def mohumohu(message):
+import discord
+async def mohumohu(message:discord.Message):
     if message.author.bot:
         return
     await message.channel.send('もふもふ…')

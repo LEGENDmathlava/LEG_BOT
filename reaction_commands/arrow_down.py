@@ -1,8 +1,10 @@
 #arrow_down
 #'⬇️'
+import discord
+from typing import Union
 import my_commands.LEG_commands.TETRIS_GAME.TETRIS_control as TETRIS
 import my_commands.LEG_commands.TEST_GAME.TESTGAME_control as TESTGAME
-async def arrow_down(reaction, user):
+async def arrow_down(reaction:discord.Reaction, user:Union[discord.Member, discord.User]):
     print('⬇️')
     if reaction.message.author.id == 671605558666592259 and reaction.message.embeds and reaction.message.embeds[0].title == 'TETRIS('+str(user.id)+')' and reaction.message.embeds[0].description == 'Now Playing':
         await TETRIS.move_down(reaction.message, user)

@@ -1,6 +1,8 @@
 #delete
+import discord
+from typing import List
 a = b = False
-async def delete(m, message):
+async def delete(m:List[str], message:discord.Message):
     global a
     global b
     if not a:

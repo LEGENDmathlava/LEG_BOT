@@ -2,10 +2,11 @@ import discord
 import os
 from random import randrange
 import time
+from typing import List, Union
 
 now_preparing_players={}
 blocks=['    \n oo \n oo \n    ', ' o  \n o  \n o  \n o  ', '    \n o  \n oo \n o  ', '    \n oo \n o  \n o  ', '    \n oo \n  o \n  o ', '    \n  o \n oo \n o  ', '    \n o  \n oo \n  o ', '    \n    \n    \n    ']
-async def GAME_PREPARE(message):
+async def GAME_PREPARE(message:discord.Message):
     global blocks
     os.makedirs('my_commands/LEG_commands/TETRIS_GAME', exist_ok=True)
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(message.author.id)+'.txt', mode='w') as f:
@@ -31,7 +32,7 @@ async def GAME_PREPARE(message):
     await embed_message.add_reaction('▶️')
     await embed_message.add_reaction('🗑️')
 
-async def GAME_START(message, user):
+async def GAME_START(message:discord.Message, user:Union[discord.Member, discord.User]):
     while True:    
         try:
             await paint(message, user)
@@ -50,7 +51,7 @@ async def GAME_START(message, user):
             return
 
 
-async def paint(message, user):
+async def paint(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -85,7 +86,7 @@ async def paint(message, user):
     embed.set_author(name=user.name, icon_url=user.avatar_url)
     await message.edit(embed=embed)
 
-async def move_left(message, user):
+async def move_left(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -113,7 +114,7 @@ async def move_left(message, user):
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def move_right(message, user):
+async def move_right(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -141,7 +142,7 @@ async def move_right(message, user):
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def move_down(message, user):
+async def move_down(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -169,7 +170,7 @@ async def move_down(message, user):
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def move_fall(message, user):
+async def move_fall(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -202,7 +203,7 @@ async def move_fall(message, user):
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def rotate_right(message, user):
+async def rotate_right(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -230,7 +231,7 @@ async def rotate_right(message, user):
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def rotate_left(message, user):
+async def rotate_left(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -258,7 +259,7 @@ async def rotate_left(message, user):
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def stock(message, user):
+async def stock(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -279,7 +280,7 @@ async def stock(message, user):
         field_write(field, stock, 0, 0, 0, next1, next2, next3, next4, block_type, score, user)
     await paint(message, user)
 
-async def auto_fall(message, user):
+async def auto_fall(message:discord.Message, user:Union[discord.Member, discord.User])->bool:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -324,10 +325,10 @@ async def auto_fall(message, user):
         return is_alive(user)
     return True
 
-def emph(block:str):
+def emph(block:str)->str:
     return block.replace('o', '@')
 
-def block_rot(block, n: int):
+def block_rot(block:List[List[str]], n: int)->List[List[str]]:
     temp = [[None for _ in range(4)] for _ in range(4)]
     if n == 0:
         for y in range(4):
@@ -347,7 +348,7 @@ def block_rot(block, n: int):
                 temp[y][x] = block[x][3-y]
     return temp
 
-def field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user):
+def field_write(field:List[List[str]], block_type:int, block_y:int, block_x:int, block_angle:int, next1:int, next2:int, next3:int, next4:int, stock:int, score:int, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='w') as f:
         f.write(''.join(map(''.join, field)))
         f.write(str(block_type)+'\n')
@@ -361,12 +362,12 @@ def field_write(field, block_type, block_y, block_x, block_angle, next1, next2, 
         f.write(str(stock)+'\n')
         f.write(str(score)+'\n')
 
-async def exit_game(message, user):
+async def exit_game(message:discord.Message, user:Union[discord.Member, discord.User]):
     global now_preparing_players
     await message.delete()
     now_preparing_players.pop(user.id)
 
-def is_alive(user):
+def is_alive(user:Union[discord.Member, discord.User])->bool:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -392,7 +393,7 @@ def is_alive(user):
                     return False
     return True
 
-async def GAME_OVER(message, user):
+async def GAME_OVER(message:discord, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -427,7 +428,7 @@ async def GAME_OVER(message, user):
     embed.set_author(name=user.name, icon_url=user.avatar_url)
     await message.edit(embed=embed)
 
-async def lines_clear(message, user):
+async def lines_clear(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -459,7 +460,7 @@ async def lines_clear(message, user):
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def next(message, user):
+async def next(message:discord, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):

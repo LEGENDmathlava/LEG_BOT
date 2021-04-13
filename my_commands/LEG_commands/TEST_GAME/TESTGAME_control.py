@@ -2,10 +2,11 @@ import discord
 import os
 from random import randrange
 import time
+from typing import List, Union
 
 now_preparing_players={}
 blocks = {'0':'<:0_:802403190397075516>', '1':'<:1_:802403829575974952>', '2':'<:2_:802404274129862710>', '3':'<:3_:802404390689439754>', '4':'<:4_:802404465256038468>', '5':'<:5_:802404605362176042>', '6':'<:6_:802404663759994890>', 'w':'<:wh:822422328926273566>', ' ':'<:bg:802405577946300446>'}
-async def GAME_PREPARE(message):
+async def GAME_PREPARE(message:discord.Message):
     global blocks
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(message.author.id)+'.txt', mode='w') as f:
         f.write('   \n   \n   \n   \n   \n   \n   \n   \n   \n   \n   \n   \n')
@@ -26,12 +27,12 @@ async def GAME_PREPARE(message):
     embed.add_field(name='Next', value='<:0_:802403190397075516><:1_:802403829575974952>\n<:bg:802405577946300446><:bg:802405577946300446>\n<:2_:802404274129862710><:3_:802404390689439754>\n<:bg:802405577946300446><:bg:802405577946300446>\n<:4_:802404465256038468><:5_:802404605362176042>\n<:bg:802405577946300446><:bg:802405577946300446>\n<:6_:802404663759994890><:0_:802403190397075516>\n<:bg:802405577946300446><:bg:802405577946300446>\n<:1_:802403829575974952><:2_:802404274129862710>\n<:bg:802405577946300446><:bg:802405577946300446>\n<:3_:802404390689439754><:4_:802404465256038468>')
     embed.add_field(name='Score', value=123)
     embed.set_author(name=message.author.name, icon_url=message.author.avatar_url)
-    embed_message = await message.channel.send(embed=embed)
+    embed_message:discord.Message = await message.channel.send(embed=embed)
     now_preparing_players[message.author.id] = embed_message
     await embed_message.add_reaction('▶️')
     await embed_message.add_reaction('🗑️')
 
-async def GAME_START(message, user):
+async def GAME_START(message:discord.Message, user:Union[discord.Member, discord.User]):
     while True:    
         try:
             await paint(message, user)
@@ -49,7 +50,7 @@ async def GAME_START(message, user):
         except discord.errors.NotFound:
             return
 
-async def paint(message, user):
+async def paint(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -103,7 +104,7 @@ async def paint(message, user):
     embed.set_author(name=user.name, icon_url=user.avatar_url)
     await message.edit(embed=embed)
 
-async def GAME_OVER(message, user):
+async def GAME_OVER(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -157,7 +158,7 @@ async def GAME_OVER(message, user):
     embed.set_author(name=user.name, icon_url=user.avatar_url)
     await message.edit(embed=embed)
 
-async def move_left(message, user):
+async def move_left(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -196,7 +197,7 @@ async def move_left(message, user):
     field_write(field, block_type1, block_type2, block_y, block_x, block_angle, next1_1, next1_2, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, stock1, stock2, score, user)
     await paint(message, user)
 
-async def move_right(message, user):
+async def move_right(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -234,7 +235,7 @@ async def move_right(message, user):
     field_write(field, block_type1, block_type2, block_y, block_x, block_angle, next1_1, next1_2, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, stock1, stock2, score, user)
     await paint(message, user)
 
-async def move_down(message, user):
+async def move_down(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -272,7 +273,7 @@ async def move_down(message, user):
     field_write(field, block_type1, block_type2, block_y, block_x, block_angle, next1_1, next1_2, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, stock1, stock2, score, user)
     await paint(message, user)
 
-async def move_fall(message, user):
+async def move_fall(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -315,7 +316,7 @@ async def move_fall(message, user):
     field_write(field, block_type1, block_type2, block_y, block_x, block_angle, next1_1, next1_2, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, stock1, stock2, score, user)
     await paint(message, user)
 
-async def rotate_right(message, user):
+async def rotate_right(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -353,7 +354,7 @@ async def rotate_right(message, user):
     field_write(field, block_type1, block_type2, block_y, block_x, block_angle, next1_1, next1_2, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, stock1, stock2, score, user)
     await paint(message, user)
 
-async def rotate_left(message, user):
+async def rotate_left(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -391,7 +392,7 @@ async def rotate_left(message, user):
     field_write(field, block_type1, block_type2, block_y, block_x, block_angle, next1_1, next1_2, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, stock1, stock2, score, user)
     await paint(message, user)
 
-async def stock(message, user):
+async def stock(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -413,7 +414,7 @@ async def stock(message, user):
         field_write(field, stock1, stock2, 0, 0, 0, next1_1, next1_2, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, block_type1, block_type2, score, user)
     await paint(message, user)
 
-async def auto_fall(message, user):
+async def auto_fall(message:discord.Message, user:Union[discord.Member, discord.User])->bool:
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -472,7 +473,7 @@ async def auto_fall(message, user):
         return is_alive(user)
     return True
 
-async def next(message, user):
+async def next(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -491,7 +492,7 @@ async def next(message, user):
     field_write(field, next1_1, next1_2, 0, 0, 0, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, str(randrange(0, 7)), str(randrange(0, 7)), stock1, stock2, score, user)
     await paint(message, user)
 
-def is_alive(user):
+def is_alive(user:Union[discord.Member, discord.User])->bool:
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -528,7 +529,7 @@ def is_alive(user):
                 return False
     return True
 
-def field_write(field, block_type1, block_type2, block_y, block_x, block_angle, next1_1, next1_2, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, stock1, stock2, score, user):
+def field_write(field:List[List[str]], block_type1:str, block_type2:str, block_y:int, block_x:int, block_angle:int, next1_1:str, next1_2:str, next2_1:str, next2_2:str, next3_1:str, next3_2:str, next4_1:str, next4_2:str, next5_1:str, next5_2:str, next6_1:str, next6_2:str, stock1:str, stock2:str, score:int, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='w') as f:
         f.write(''.join(map(''.join, field)))
         f.write(block_type1+','+block_type2+'\n')
@@ -543,12 +544,12 @@ def field_write(field, block_type1, block_type2, block_y, block_x, block_angle, 
         f.write(stock1+','+stock2+'\n')
         f.write(str(score)+'\n')
 
-async def exit_game(message, user):
+async def exit_game(message:discord.Message, user:Union[discord.Member, discord.User]):
     global now_preparing_players
     await message.delete()
     now_preparing_players.pop(user.id)
 
-async def blocks_fall(message, user):
+async def blocks_fall(message:discord.Message, user:Union[discord.Member, discord.User]):
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -583,7 +584,7 @@ async def blocks_fall(message, user):
     field_write(field, block_type1, block_type2, block_y, block_x, block_angle, next1_1, next1_2, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, stock1, stock2, score, user)
     await paint(message, user)
 
-async def rensa(message, user, rensasuu):
+async def rensa(message:discord.Message, user:Union[discord.Member, discord.User], rensasuu:int)->bool:
     with open('my_commands/LEG_commands/TEST_GAME/TESTGAME'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(12):
@@ -623,7 +624,7 @@ async def rensa(message, user, rensasuu):
     field_write(field, block_type1, block_type2, block_y, block_x, block_angle, next1_1, next1_2, next2_1, next2_2, next3_1, next3_2, next4_1, next4_2, next5_1, next5_2, next6_1, next6_2, stock1, stock2, score, user)    
     await paint(message, user)
     return b
-def count_rinsetsu(field, x, y):
+def count_rinsetsu(field:List[List[str]], x:int, y:int):
     n=0
     if x <= 1 and field[y][x+1] == field[y][x]:
         n += 1
@@ -635,7 +636,7 @@ def count_rinsetsu(field, x, y):
         n += 1
     return n
 
-def whiten(view_field, x, y):
+def whiten(view_field:List[List[str]], x:int, y:int):
     block_type = view_field[y][x]
     view_field[y][x] = 'w'
     if x <= 1 and view_field[y][x+1] == block_type:
@@ -647,8 +648,8 @@ def whiten(view_field, x, y):
     if y >= 1 and view_field[y-1][x] == block_type:
         whiten(view_field, x, y-1)
     
-def block_shoukyo(cleared_field, x, y, doujikeshi):
-    block_type = cleared_field[y][x]
+def block_shoukyo(cleared_field:List[List[str]], x:int, y:int, doujikeshi:int)->int:
+    block_type:str = cleared_field[y][x]
     cleared_field[y][x] = ' '
     n=doujikeshi
     if x <= 1 and cleared_field[y][x+1] == block_type:

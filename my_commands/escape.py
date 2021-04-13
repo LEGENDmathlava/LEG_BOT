@@ -1,5 +1,7 @@
 #escape
-async def escape(m, message):
+import discord
+from typing import List
+async def escape(m:List[str], message:discord.Message):
     if message.author.bot:
         return
     if message.reference:
@@ -12,3 +14,4 @@ async def escape(m, message):
             escape_string += ch
         if escape_string != '': 
             await message.channel.send(escape_string[:2000])
+            s = m[0]

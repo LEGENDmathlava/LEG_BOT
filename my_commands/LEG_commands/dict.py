@@ -1,8 +1,10 @@
 #char_NAME RAND_CHAR n_char_NAME
 
+import discord
 import random
+from typing import List, Dict, Optional
 
-def setCharDict():
+def setCharDict()->Dict[int, Optional[List[str]]]:
     f = open('my_commands/LEG_commands/characters/uni.txt')
     chardict = {}
     line = f.readline()
@@ -22,7 +24,7 @@ def setCharDict():
             chardict[i] = None
     return chardict
 
-def setJoyoDict():
+def setJoyoDict()->Dict[int, List[str]]:
     f = open('my_commands/LEG_commands/characters/joyo.txt')
     joyodict = {}
     line = f.readline()
@@ -39,7 +41,7 @@ def setJoyoDict():
     f.close()
     return joyodict
 
-def setUniHanDict():
+def setUniHanDict()->Dict[int, str]:
     f = open('my_commands/LEG_commands/characters/unihan.txt')
     unihandict = {}
     line = f.readline()
@@ -54,7 +56,7 @@ chardict = setCharDict()
 joyodict = setJoyoDict()
 unihandict = setUniHanDict()
 
-async def char_NAME(m, message):
+async def char_NAME(m:List[str], message:discord.Message):
     if message.reference:
         message2 = await message.channel.fetch_message(message.reference.message_id)
         if message2.content == '':
@@ -85,7 +87,7 @@ async def char_NAME(m, message):
         s += char_NAME + '\n'
     await message.channel.send(s[:2000])
     
-async def RAND_CHAR(m, message):
+async def RAND_CHAR(m:List[str], message:discord.Message):
     r = random.choice(list(chardict.keys()))
     while chardict[r] == None:
         r = random.choice(list(chardict.keys()))
@@ -102,7 +104,7 @@ async def RAND_CHAR(m, message):
     await message.channel.send(chr(r)+char_NAME)
 
 
-async def n_char_NAME(m, message):
+async def n_char_NAME(m:List[str], message:discord.Message):
     if message.reference:
         message2 = await message.channel.fetch_message(message.reference.message_id)
         if message2.content == '':
