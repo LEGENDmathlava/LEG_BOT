@@ -30,5 +30,5 @@ foreach my $command_module_file (@command_module_files){
   print FH "\n";
 }
 
-print FH "\nasync def LEG(m:List[str], message:discord.Message):\n    if (len(m) > 1) and (m[1] in globals()) and (str(globals()[m[1]])[:9] == '<function'):\n        await globals()[m[1]](m, message)";
+print FH "\nasync def LEG(m:List[str], message:discord.Message)->None:\n    if (len(m) > 1) and (m[1] in globals()) and (str(globals()[m[1]])[:9] == '<function'):\n        await globals()[m[1]](m, message)";
 close FH;

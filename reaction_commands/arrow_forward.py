@@ -5,7 +5,7 @@ from typing import Union
 now_playing_players=set()
 import my_commands.LEG_commands.TETRIS_GAME.TETRIS_control as TETRIS
 import my_commands.LEG_commands.TEST_GAME.TESTGAME_control as TESTGAME
-async def arrow_forward(reaction:discord.Reaction, user:Union[discord.Member, discord.User]):
+async def arrow_forward(reaction:discord.Reaction, user:Union[discord.Member, discord.User])->None:
     print('▶️')
     if reaction.message.author.id == 671605558666592259 and reaction.message.embeds and reaction.message.embeds[0].title == 'TETRIS('+str(user.id)+')' and reaction.message.embeds[0].description == 'STAND BY' and user.id not in now_playing_players:
         now_playing_players.add(user.id)

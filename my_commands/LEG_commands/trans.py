@@ -1,7 +1,7 @@
 #trans
 import discord
 from typing import List
-async def trans(m:List[str], message:discord.Message):
+async def trans(m:List[str], message:discord.Message)->None:
     if message.reference:
         message2 = await message.channel.fetch_message(message.reference.message_id)
         if message2.content == '':

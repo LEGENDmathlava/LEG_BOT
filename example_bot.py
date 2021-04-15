@@ -18,17 +18,12 @@ from legbot_unchi import *
 from my_command import my_command
 from reaction_command import reaction_command
 
-# 起動時に動作する処理
-@client.event
-async def on_ready():
-    # 起動したらターミナルにログイン通知が表示される
-    print('ログインしました')
 b = False
 
 # メッセージ受信時に動作する処理
 num=random.randrange(100)+1000
 @client.event
-async def on_message(message:discord.Message):
+async def on_message(message:discord.Message)->None:
     if message.author.id == 739586615487496274:
         return
     if message.channel.id == 534027499252744202:
@@ -61,7 +56,7 @@ async def on_message(message:discord.Message):
     
 
 @client.event
-async def on_raw_reaction_add(payload:discord.RawMessageDeleteEvent):
+async def on_raw_reaction_add(payload:discord.RawMessageDeleteEvent)->None:
     channel = client.get_channel(payload.channel_id)
     message = await channel.fetch_message(payload.message_id)
     emoji = payload.emoji
@@ -74,11 +69,11 @@ async def on_raw_reaction_add(payload:discord.RawMessageDeleteEvent):
     await reaction_command(reaction, user)
 
 @client.event
-async def on_ready():
+async def on_ready()->None:
     print('on_ready')
 
 @client.event
-async def on_typing(channel:discord.abc.Messageable, user:Union[discord.User, discord.Member], when:datetime.datetime):
+async def on_typing(channel:discord.abc.Messageable, user:Union[discord.User, discord.Member], when:datetime.datetime)->None:
     if channel.id == 740114205444931594:
         await channel.send(user.mention+'\nこんにちわ！！！！！')
         print(channel.guild)
@@ -89,17 +84,17 @@ async def on_typing(channel:discord.abc.Messageable, user:Union[discord.User, di
 
 
 @client.event
-async def on_guild_channel_create(channel:discord.abc.GuildChannel):
+async def on_guild_channel_create(channel:discord.abc.GuildChannel)->None:
     print('test34')
     if channel.guild.id == 739882359649992714 or channel.guild.id == 378912400113664000:
         await channel.send(channel.mention+'に一番乗り！！')
 
 @client.event
-async def on_guild_channel_update(before:discord.abc.GuildChannel, after:discord.abc.GuildChannel):
+async def on_guild_channel_update(before:discord.abc.GuildChannel, after:discord.abc.GuildChannel)->None:
     print('test43')
 
 @client.event
-async def on_guild_channel_delete(channel:discord.abc.GuildChannel):
+async def on_guild_channel_delete(channel:discord.abc.GuildChannel)->None:
     if channel.guild.id == 739882359649992714:
         channel2 = client.get_channel(804573278937153596)
         await channel2.send(channel.name+'を返せ！！')

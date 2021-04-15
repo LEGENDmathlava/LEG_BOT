@@ -4,7 +4,7 @@ import discord
 import time
 import requests
 
-async def paiza_java(message:discord.Message):
+async def paiza_java(message:discord.Message)->None:
     print(message.content)
     if message.content.startswith('#') or message.author.bot:
         return

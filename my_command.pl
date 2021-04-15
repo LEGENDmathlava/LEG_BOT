@@ -30,5 +30,5 @@ foreach my $command_module_file (@command_module_files){
   print FH "\n";
 }
 
-print FH "async def my_command(message:discord.Message):\n    m = message.content.split()\n    if len(m) == 0:\n        return\n    if (m[0] in globals()) and (str(globals()[m[0]])[:9] == '<function'):\n        await globals()[m[0]](m, message)\n    await in_command(message)\n    await regex_command(message)\n";
+print FH "async def my_command(message:discord.Message)->None:\n    m = message.content.split()\n    if len(m) == 0:\n        return\n    if (m[0] in globals()) and (str(globals()[m[0]])[:9] == '<function'):\n        await globals()[m[0]](m, message)\n    await in_command(message)\n    await regex_command(message)\n";
 close FH;

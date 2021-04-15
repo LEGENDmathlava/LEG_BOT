@@ -2,11 +2,11 @@ import discord
 import os
 from random import randrange
 import time
-from typing import List, Union
+from typing import List, Union, Dict, Any, Optional
 
-now_preparing_players={}
-blocks=['    \n oo \n oo \n    ', ' o  \n o  \n o  \n o  ', '    \n o  \n oo \n o  ', '    \n oo \n o  \n o  ', '    \n oo \n  o \n  o ', '    \n  o \n oo \n o  ', '    \n o  \n oo \n  o ', '    \n    \n    \n    ']
-async def GAME_PREPARE(message:discord.Message):
+now_preparing_players:Dict[int, discord.Message]={}
+blocks:List[str]=['    \n oo \n oo \n    ', ' o  \n o  \n o  \n o  ', '    \n o  \n oo \n o  ', '    \n oo \n o  \n o  ', '    \n oo \n  o \n  o ', '    \n  o \n oo \n o  ', '    \n o  \n oo \n  o ', '    \n    \n    \n    ']
+async def GAME_PREPARE(message:discord.Message)->None:
     global blocks
     os.makedirs('my_commands/LEG_commands/TETRIS_GAME', exist_ok=True)
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(message.author.id)+'.txt', mode='w') as f:
@@ -32,7 +32,7 @@ async def GAME_PREPARE(message:discord.Message):
     await embed_message.add_reaction('▶️')
     await embed_message.add_reaction('🗑️')
 
-async def GAME_START(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def GAME_START(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     while True:    
         try:
             await paint(message, user)
@@ -51,7 +51,7 @@ async def GAME_START(message:discord.Message, user:Union[discord.Member, discord
             return
 
 
-async def paint(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def paint(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -66,7 +66,7 @@ async def paint(message:discord.Message, user:Union[discord.Member, discord.User
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     for y in range(4):
         for x in range(4):
@@ -86,7 +86,7 @@ async def paint(message:discord.Message, user:Union[discord.Member, discord.User
     embed.set_author(name=user.name, icon_url=user.avatar_url)
     await message.edit(embed=embed)
 
-async def move_left(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def move_left(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -101,7 +101,7 @@ async def move_left(message:discord.Message, user:Union[discord.Member, discord.
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     block_x -= 1
     for y in range(4):
@@ -114,7 +114,7 @@ async def move_left(message:discord.Message, user:Union[discord.Member, discord.
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def move_right(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def move_right(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -129,7 +129,7 @@ async def move_right(message:discord.Message, user:Union[discord.Member, discord
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     block_x += 1
     for y in range(4):
@@ -142,7 +142,7 @@ async def move_right(message:discord.Message, user:Union[discord.Member, discord
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def move_down(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def move_down(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -157,7 +157,7 @@ async def move_down(message:discord.Message, user:Union[discord.Member, discord.
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     block_y += 1
     for y in range(4):
@@ -170,7 +170,7 @@ async def move_down(message:discord.Message, user:Union[discord.Member, discord.
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def move_fall(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def move_fall(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -185,7 +185,7 @@ async def move_fall(message:discord.Message, user:Union[discord.Member, discord.
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     b = True
     if block_type == 7:
@@ -203,7 +203,7 @@ async def move_fall(message:discord.Message, user:Union[discord.Member, discord.
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def rotate_right(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def rotate_right(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -218,7 +218,7 @@ async def rotate_right(message:discord.Message, user:Union[discord.Member, disco
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     block_angle = (block_angle + 1) % 4
     split_block = block_rot(split_block, block_angle)
     for y in range(4):
@@ -231,7 +231,7 @@ async def rotate_right(message:discord.Message, user:Union[discord.Member, disco
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def rotate_left(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def rotate_left(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -246,7 +246,7 @@ async def rotate_left(message:discord.Message, user:Union[discord.Member, discor
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     block_angle = (block_angle - 1) % 4
     split_block = block_rot(split_block, block_angle)
     for y in range(4):
@@ -259,7 +259,7 @@ async def rotate_left(message:discord.Message, user:Union[discord.Member, discor
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def stock(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def stock(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -295,7 +295,7 @@ async def auto_fall(message:discord.Message, user:Union[discord.Member, discord.
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     block_y += 1
     b = True
@@ -329,7 +329,7 @@ def emph(block:str)->str:
     return block.replace('o', '@')
 
 def block_rot(block:List[List[str]], n: int)->List[List[str]]:
-    temp = [[None for _ in range(4)] for _ in range(4)]
+    temp:List[List[str]] = [['' for _ in range(4)] for _ in range(4)]
     if n == 0:
         for y in range(4):
             for x in range(4):
@@ -348,7 +348,7 @@ def block_rot(block:List[List[str]], n: int)->List[List[str]]:
                 temp[y][x] = block[x][3-y]
     return temp
 
-def field_write(field:List[List[str]], block_type:int, block_y:int, block_x:int, block_angle:int, next1:int, next2:int, next3:int, next4:int, stock:int, score:int, user:Union[discord.Member, discord.User]):
+def field_write(field:List[List[str]], block_type:int, block_y:int, block_x:int, block_angle:int, next1:int, next2:int, next3:int, next4:int, stock:int, score:int, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='w') as f:
         f.write(''.join(map(''.join, field)))
         f.write(str(block_type)+'\n')
@@ -362,7 +362,7 @@ def field_write(field:List[List[str]], block_type:int, block_y:int, block_x:int,
         f.write(str(stock)+'\n')
         f.write(str(score)+'\n')
 
-async def exit_game(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def exit_game(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     global now_preparing_players
     await message.delete()
     now_preparing_players.pop(user.id)
@@ -382,7 +382,7 @@ def is_alive(user:Union[discord.Member, discord.User])->bool:
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     for y in range(4):
         for x in range(4):
@@ -393,7 +393,7 @@ def is_alive(user:Union[discord.Member, discord.User])->bool:
                     return False
     return True
 
-async def GAME_OVER(message:discord, user:Union[discord.Member, discord.User]):
+async def GAME_OVER(message:discord, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -408,7 +408,7 @@ async def GAME_OVER(message:discord, user:Union[discord.Member, discord.User]):
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     for y in range(4):
         for x in range(4):
@@ -428,7 +428,7 @@ async def GAME_OVER(message:discord, user:Union[discord.Member, discord.User]):
     embed.set_author(name=user.name, icon_url=user.avatar_url)
     await message.edit(embed=embed)
 
-async def lines_clear(message:discord.Message, user:Union[discord.Member, discord.User]):
+async def lines_clear(message:discord.Message, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -443,7 +443,7 @@ async def lines_clear(message:discord.Message, user:Union[discord.Member, discor
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     for y in range(20):
         is_line_full = True
@@ -460,7 +460,7 @@ async def lines_clear(message:discord.Message, user:Union[discord.Member, discor
     field_write(field, block_type, block_y, block_x, block_angle, next1, next2, next3, next4, stock, score, user)
     await paint(message, user)
 
-async def next(message:discord, user:Union[discord.Member, discord.User]):
+async def next(message:discord, user:Union[discord.Member, discord.User])->None:
     with open('my_commands/LEG_commands/TETRIS_GAME/TETRIS'+str(user.id)+'.txt', mode='r') as f:
         field = []
         for _ in range(21):
@@ -475,7 +475,7 @@ async def next(message:discord, user:Union[discord.Member, discord.User]):
         next4 = int(f.readline())
         stock = int(f.readline())
         score = int(f.readline())
-    split_block = list(map(list, blocks[block_type].split('\n')))
+    split_block = list(map(toList, blocks[block_type].split('\n')))
     split_block = block_rot(split_block, block_angle)
     field_write(field, next1, 0, 0, 0, next2, next3, next4, randrange(0, 7), stock, score, user)
     await paint(message, user)

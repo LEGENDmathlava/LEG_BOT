@@ -4,7 +4,7 @@ import discord
 import time
 import requests
 
-async def paiza_python(message:discord.Message):
+async def paiza_python(message:discord.Message)->None:
     print(message.content)
     if message.content.startswith('#') or 'public static void main' in message.content or message.author.bot:
         return

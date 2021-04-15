@@ -5,7 +5,7 @@ import discord
 import time
 from typing import Dict
 
-async def brainfuck(message:discord.Message):
+async def brainfuck(message:discord.Message)->None:
     print('========brain f*ck========')
     temp = message.content.split('\n# INPUT\n')
     source = temp[0]
@@ -25,7 +25,7 @@ async def brainfuck(message:discord.Message):
         await message.channel.send('現在非ASCII文字には対応していません')
         return
     source_ptr=0
-    mem={}
+    mem:Dict[int, int]={}
     mem_ptr=0
     step=0
     output_string=''
@@ -95,7 +95,7 @@ async def brainfuck(message:discord.Message):
         await message.channel.send(output_string)
     print('========----------========')
 
-async def paint(message:discord.Message, embed_message:discord.Message, source:str, source_ptr:int, mem:Dict[int, int], mem_ptr:int, step:int, input_string:str, output_string:str, flag:bool):
+async def paint(message:discord.Message, embed_message:discord.Message, source:str, source_ptr:int, mem:Dict[int, int], mem_ptr:int, step:int, input_string:str, output_string:str, flag:bool)->None:
     description = 'running' if flag else 'end'
     for _ in range(100):
         time.sleep(0.01)

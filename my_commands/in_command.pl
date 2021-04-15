@@ -32,7 +32,7 @@ foreach my $command_module_file (@command_module_files){
   print FH "from $command_module import $file2function{$command_module_file} \n";
 }
 
-print FH "async def in_command(message:discord.Message):\n";
+print FH "async def in_command(message:discord.Message)->None:\n";
 foreach my $function (@functions){
   my $str2 = $func2str{$function};
   print FH "    if ${str2} in message.content:\n";

@@ -1,7 +1,7 @@
 #escape
 import discord
 from typing import List
-async def escape(m:List[str], message:discord.Message):
+async def escape(m:List[str], message:discord.Message)->None:
     if message.author.bot:
         return
     if message.reference:

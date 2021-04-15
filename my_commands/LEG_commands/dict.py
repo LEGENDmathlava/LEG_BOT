@@ -6,7 +6,7 @@ from typing import List, Dict, Optional
 
 def setCharDict()->Dict[int, Optional[List[str]]]:
     f = open('my_commands/LEG_commands/characters/uni.txt')
-    chardict = {}
+    chardict:Dict[int, Optional[List[str]]] = {}
     line = f.readline()
     while line:
         linedata = line.split(';')
@@ -56,7 +56,7 @@ chardict = setCharDict()
 joyodict = setJoyoDict()
 unihandict = setUniHanDict()
 
-async def char_NAME(m:List[str], message:discord.Message):
+async def char_NAME(m:List[str], message:discord.Message)->None:
     if message.reference:
         message2 = await message.channel.fetch_message(message.reference.message_id)
         if message2.content == '':
@@ -71,11 +71,12 @@ async def char_NAME(m:List[str], message:discord.Message):
     s=''
     for ss in my_str:
         k = ord(ss)
-        if chardict[k] == None:
+        linedata = chardict[k]
+        if linedata is None:
            s += str(None) + '\n'
            continue
-        char_NAME = chardict[k][1]
-        char_OLD_NAME = chardict[k][10]
+        char_NAME = linedata[1]
+        char_OLD_NAME = linedata[10]
         if char_OLD_NAME != '':
             char_NAME += '(' + char_OLD_NAME + ')'
         if k in joyodict:
@@ -87,12 +88,13 @@ async def char_NAME(m:List[str], message:discord.Message):
         s += char_NAME + '\n'
     await message.channel.send(s[:2000])
     
-async def RAND_CHAR(m:List[str], message:discord.Message):
+async def RAND_CHAR(m:List[str], message:discord.Message)->None:
     r = random.choice(list(chardict.keys()))
-    while chardict[r] == None:
+    linedata = chardict[r]
+    while linedata is None:
         r = random.choice(list(chardict.keys()))
-    char_NAME = chardict[r][1]
-    char_OLD_NAME = chardict[r][10]
+    char_NAME = linedata[1]
+    char_OLD_NAME = linedata[10]
     if char_OLD_NAME != '':
         char_NAME += '(' + char_OLD_NAME + ')'
     if r in joyodict:
@@ -104,7 +106,7 @@ async def RAND_CHAR(m:List[str], message:discord.Message):
     await message.channel.send(chr(r)+char_NAME)
 
 
-async def n_char_NAME(m:List[str], message:discord.Message):
+async def n_char_NAME(m:List[str], message:discord.Message)->None:
     if message.reference:
         message2 = await message.channel.fetch_message(message.reference.message_id)
         if message2.content == '':
@@ -119,11 +121,12 @@ async def n_char_NAME(m:List[str], message:discord.Message):
     s=''
     for ss in my_str:
         k = ord(ss)
-        if chardict[k] == None:
+        linedata = chardict[k]
+        if linedata is None:
            s += hex(k) + ' ' + str(None) + '\n'
            continue
-        char_NAME = chardict[k][1]
-        char_OLD_NAME = chardict[k][10]
+        char_NAME = linedata[1]
+        char_OLD_NAME = linedata[10]
         if char_OLD_NAME != '':
             char_NAME += '(' + char_OLD_NAME + ')'
         if k in joyodict:

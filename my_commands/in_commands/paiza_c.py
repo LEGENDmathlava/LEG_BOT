@@ -4,7 +4,7 @@ import discord
 import time
 import requests
 
-async def paiza_c(message:discord.Message):
+async def paiza_c(message:discord.Message)->None:
     print(message.content)
     if not message.content.startswith('#include<stdio.h>') and not message.content.startswith('#include <stdio.h>') or message.author.bot:
         return

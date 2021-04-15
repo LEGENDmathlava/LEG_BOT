@@ -12,5 +12,5 @@ def setDEUTSCH()->List[str]:
     f.close()
     return linelist
 linelist = setDEUTSCH()
-async def DEUTSCH(m, message):
+async def DEUTSCH(m:List[str], message:discord.Message)->None:
     await message.channel.send(random.choice(linelist))
