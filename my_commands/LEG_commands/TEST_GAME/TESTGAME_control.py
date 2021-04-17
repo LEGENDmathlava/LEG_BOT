@@ -6,7 +6,7 @@ from typing import List, Union, Tuple, Dict
 from copy import deepcopy
 
 class Game:
-    def __init__(self, user: Union[discord.Member, discord.User]) -> None:
+    def __init__(self) -> None:
         self.field = [[' ', ' ', ' ', '\n'] for _ in range(12)]
         self.now_block = (str(randrange(0, 7)), str(randrange(0, 7)))
         self.block_position = (0, 0)
@@ -40,7 +40,7 @@ class Game:
         for y in range(3):
             for x in range(3):
                 if 0 <= self.block_position[1] + y - 1 <= 11 and 0 <= self.block_position[0] + x <= 2:
-                    back = self.field[self.block_position[1] + y - 1][self.block_position[0] + x]
+                    back = field[self.block_position[1] + y - 1][self.block_position[0] + x]
                     forward = split_block[y][x]
                     if forward != ' ':
                         if back == ' ':
@@ -194,7 +194,7 @@ now_preparing_players :Dict[int, Tuple[discord.Message, Game]] ={}
 blocks = {'0':'<:0_:802403190397075516>', '1':'<:1_:802403829575974952>', '2':'<:2_:802404274129862710>', '3':'<:3_:802404390689439754>', '4':'<:4_:802404465256038468>', '5':'<:5_:802404605362176042>', '6':'<:6_:802404663759994890>', 'w':'<:wh:822422328926273566>', ' ':'<:bg:802405577946300446>'}
 async def GAME_PREPARE(message:discord.Message)->None:
     global blocks
-    game = Game(message.author)
+    game = Game()
     embed = discord.Embed(title='TESTGAME('+str(message.author.id)+')', description='STAND BY')
     embed.add_field(name='Stock', value='<:2_:802404274129862710><:3_:802404390689439754>', inline=False)
     embed.add_field(name='Game', value='<:0_:802403190397075516><:0_:802403190397075516><:0_:802403190397075516>\n<:6_:802404663759994890><:bg:802405577946300446><:bg:802405577946300446>\n<:2_:802404274129862710><:3_:802404390689439754><:bg:802405577946300446>\n<:bg:802405577946300446><:bg:802405577946300446><:0_:802403190397075516>\n<:3_:802404390689439754><:0_:802403190397075516><:3_:802404390689439754>\n<:bg:802405577946300446><:bg:802405577946300446><:6_:802404663759994890>\n<:2_:802404274129862710><:2_:802404274129862710><:0_:802403190397075516>\n<:3_:802404390689439754><:0_:802403190397075516><:2_:802404274129862710>\n<:6_:802404663759994890><:6_:802404663759994890><:0_:802403190397075516>\n<:0_:802403190397075516><:6_:802404663759994890><:0_:802403190397075516>\n<:2_:802404274129862710><:3_:802404390689439754><:6_:802404663759994890>\n<:3_:802404390689439754><:0_:802403190397075516><:0_:802403190397075516>')
