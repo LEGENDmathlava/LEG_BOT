@@ -1,7 +1,9 @@
-#trans
+# trans
 import discord
 from typing import List
-async def trans(m:List[str], message:discord.Message)->None:
+
+
+async def trans(m: List[str], message: discord.Message) -> None:
     if message.reference:
         message2 = await message.channel.fetch_message(message.reference.message_id)
         if message2.content == '':
@@ -12,7 +14,7 @@ async def trans(m:List[str], message:discord.Message)->None:
         if len(m) < 3:
             await message.channel.send('文字を一つ以上必要です')
             return
-        my_str = message.content[message.content.find(m[2], message.content.find(m[1])+5):]
+        my_str = message.content[message.content.find(m[2], message.content.find(m[1]) + 5):]
     s = ''
     my_str = my_str.encode('utf-8')
     if len(my_str) >= 644:

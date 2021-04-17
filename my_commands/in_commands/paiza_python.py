@@ -1,14 +1,15 @@
-#paiza_python
-#'print'
+# paiza_python
+# 'print'
 import discord
 import time
 import requests
 
-async def paiza_python(message:discord.Message)->None:
+
+async def paiza_python(message: discord.Message) -> None:
     print(message.content)
     if message.content.startswith('#') or 'public static void main' in message.content or message.author.bot:
         return
-    temp:list[str] = message.content.split('\n# INPUT\n')
+    temp: list[str] = message.content.split('\n# INPUT\n')
     source = temp[0]
     input_string = '\n# INPUT\n'.join(temp[1:])
     url = 'http://api.paiza.io'

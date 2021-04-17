@@ -1,14 +1,15 @@
-#paiza_c
-#'<stdio.h>'
+# paiza_c
+# '<stdio.h>'
 import discord
 import time
 import requests
 
-async def paiza_c(message:discord.Message)->None:
+
+async def paiza_c(message: discord.Message) -> None:
     print(message.content)
     if not message.content.startswith('#include<stdio.h>') and not message.content.startswith('#include <stdio.h>') or message.author.bot:
         return
-    temp:list[str] = message.content.split('\n# INPUT\n')
+    temp: list[str] = message.content.split('\n# INPUT\n')
     source = temp[0]
     input_string = '\n# INPUT\n'.join(temp[1:])
     url = 'http://api.paiza.io'

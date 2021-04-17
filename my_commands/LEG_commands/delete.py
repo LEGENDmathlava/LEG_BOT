@@ -1,8 +1,10 @@
-#delete
+# delete
 import discord
 from typing import List
 a = b = False
-async def delete(m:List[str], message:discord.Message)->None:
+
+
+async def delete(m: List[str], message: discord.Message) -> None:
     global a
     global b
     if not a:
@@ -14,11 +16,11 @@ async def delete(m:List[str], message:discord.Message)->None:
                 messages = await message.channel.history(limit=3000, oldest_first=True).flatten()
                 print('逆順中')
                 messages.reverse()
-                i=0
+                i = 0
                 for message in messages:
                     try:
                         await message.delete()
-                    except:
+                    except discord.HTTPException:
                         print('error')
                         pass
                     print(i, 'test', message.content)

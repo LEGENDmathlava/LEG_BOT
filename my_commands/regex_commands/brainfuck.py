@@ -1,11 +1,12 @@
-#brainfuck
-#r'^[><+-.,[\]]+(\n# INPUT\n.*)?$'
+# brainfuck
+# r'^[><+-.,[\]]+(\n# INPUT\n.*)?$'
 
 import discord
 import time
 from typing import Dict
 
-async def brainfuck(message:discord.Message)->None:
+
+async def brainfuck(message: discord.Message) -> None:
     print('========brain f*ck========')
     temp = message.content.split('\n# INPUT\n')
     source = temp[0]
@@ -24,19 +25,19 @@ async def brainfuck(message:discord.Message)->None:
     if not input_string.isascii():
         await message.channel.send('現在非ASCII文字には対応していません')
         return
-    source_ptr=0
-    mem:Dict[int, int]={}
-    mem_ptr=0
-    step=0
-    output_string=''
+    source_ptr = 0
+    mem: Dict[int, int] = {}
+    mem_ptr = 0
+    step = 0
+    output_string = ''
     embed = discord.Embed(title='brainf*ck', description='START')
     embed.add_field(name='source_ptr', value=source_ptr)
     embed.add_field(name='mem_ptr', value=mem_ptr)
     embed.add_field(name='step', value=step)
-    embed.add_field(name='source', value='```\n'+source_extract(source, source_ptr)+'\n'+' '*13+'^'+' '*13+'\n```', inline=False)
-    embed.add_field(name='mem', value='```\n'+mem_extract(mem, mem_ptr)+'\n'+' '*13+'^'+' '*13+'\n```', inline=False)
-    embed.add_field(name='input_buffer', value='```\n'+input_string[:1016]+'\n```', inline=False)
-    embed.add_field(name='output_buffer', value='```\n'+output_string[-1016:]+'\n```', inline=False)
+    embed.add_field(name='source', value='```\n' + source_extract(source, source_ptr) + '\n' + ' ' * 13 + '^' + ' ' * 13 + '\n```', inline=False)
+    embed.add_field(name='mem', value='```\n' + mem_extract(mem, mem_ptr) + '\n' + ' ' * 13 + '^' + ' ' * 13 + '\n```', inline=False)
+    embed.add_field(name='input_buffer', value='```\n' + input_string[:1016] + '\n```', inline=False)
+    embed.add_field(name='output_buffer', value='```\n' + output_string[-1016:] + '\n```', inline=False)
     embed.set_author(name=message.author.name, icon_url=message.author.avatar_url)
     embed_message = await message.channel.send(embed=embed)
     brancket_taiou = {}
@@ -46,12 +47,12 @@ async def brainfuck(message:discord.Message)->None:
         if ch == '[':
             brancket_stack.append(i)
         if ch == ']':
-            left = brancket_stack.pop(len(brancket_stack)-1)
+            left = brancket_stack.pop(len(brancket_stack) - 1)
             right = i
             brancket_taiou[left] = right
             brancket_taiou[right] = left
     print(brancket_taiou)
-    #for i in range(200):
+    # for i in range(200):
     while True:
         ch = source[source_ptr]
         if ch == '+':
@@ -95,7 +96,8 @@ async def brainfuck(message:discord.Message)->None:
         await message.channel.send(output_string)
     print('========----------========')
 
-async def paint(message:discord.Message, embed_message:discord.Message, source:str, source_ptr:int, mem:Dict[int, int], mem_ptr:int, step:int, input_string:str, output_string:str, flag:bool)->None:
+
+async def paint(message: discord.Message, embed_message: discord.Message, source: str, source_ptr: int, mem: Dict[int, int], mem_ptr: int, step: int, input_string: str, output_string: str, flag: bool) -> None:
     description = 'running' if flag else 'end'
     for _ in range(100):
         time.sleep(0.01)
@@ -103,19 +105,21 @@ async def paint(message:discord.Message, embed_message:discord.Message, source:s
     embed.add_field(name='source_ptr', value=source_ptr)
     embed.add_field(name='mem_ptr', value=mem_ptr)
     embed.add_field(name='step', value=step)
-    embed.add_field(name='source', value='```\n'+source_extract(source, source_ptr)+'\n'+' '*13+'^'+' '*13+'\n```', inline=False)
-    embed.add_field(name='mem', value='```\n'+mem_extract(mem, mem_ptr)+'\n'+' '*13+'^'+' '*13+'\n```', inline=False)
-    embed.add_field(name='input_buffer', value='```\n'+input_string[:1016]+'\n```', inline=False)
-    embed.add_field(name='output_buffer', value='```\n'+output_string[-1016:]+'\n```', inline=False)
+    embed.add_field(name='source', value='```\n' + source_extract(source, source_ptr) + '\n' + ' ' * 13 + '^' + ' ' * 13 + '\n```', inline=False)
+    embed.add_field(name='mem', value='```\n' + mem_extract(mem, mem_ptr) + '\n' + ' ' * 13 + '^' + ' ' * 13 + '\n```', inline=False)
+    embed.add_field(name='input_buffer', value='```\n' + input_string[:1016] + '\n```', inline=False)
+    embed.add_field(name='output_buffer', value='```\n' + output_string[-1016:] + '\n```', inline=False)
     embed.set_author(name=message.author.name, icon_url=message.author.avatar_url)
     await embed_message.edit(embed=embed)
 
-def source_extract(source:str, source_ptr:int)->str:
-    return (' '*13 + source + ' '*14)[source_ptr:27+source_ptr]
 
-def mem_extract(mem:Dict[int, int], mem_ptr:int)->str:
-    s=''
-    for i in range(mem_ptr-4, mem_ptr+5):
+def source_extract(source: str, source_ptr: int) -> str:
+    return (' ' * 13 + source + ' ' * 14)[source_ptr: 27 + source_ptr]
+
+
+def mem_extract(mem: Dict[int, int], mem_ptr: int) -> str:
+    s = ''
+    for i in range(mem_ptr - 4, mem_ptr + 5):
         if i not in mem:
             s += '00 '
         else:

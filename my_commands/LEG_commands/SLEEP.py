@@ -1,8 +1,10 @@
-#SLEEP
+# SLEEP
 import discord
 from typing import List
 import sys
-async def SLEEP(m:List[str], message:discord.Message)->None:
+
+
+async def SLEEP(m: List[str], message: discord.Message) -> None:
     print(chr(7))
     print(chr(7))
     print(chr(7))

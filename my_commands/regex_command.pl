@@ -14,26 +14,26 @@ foreach my $command_module_file (@command_module_files){
   open IN, '<', $command_module_file;
   my $functions_line = <IN>;
   $functions_line =~ s/\x0D?\x0A?$//;
-  $functions_line =~ s/^#//;
+  $functions_line =~ s/^# //;
   $file2function{$command_module_file} = $functions_line;
   my $str = <IN>;
   $str =~ s/\x0D?\x0A?$//;
-  $str =~ s/^#//;
+  $str =~ s/^# //;
   $func2str{$functions_line} = $str;
   @functions = (@functions, $functions_line);
   close IN;
 }
 open FH, '>', "my_commands/regex_command.py";
-print FH "#regex_command\nimport discord\n";
+print FH "# regex_command\nimport discord\n";
 print FH "import re\n";
 foreach my $command_module_file (@command_module_files){
   my $command_module = $command_module_file;
   $command_module =~ s/\//./g;
   $command_module =~ s/.py$//;
-  print FH "from $command_module import $file2function{$command_module_file} \n";
+  print FH "from $command_module import $file2function{$command_module_file}\n";
 }
 
-print FH "async def regex_command(message:discord.Message)->None:\n";
+print FH "\n\nasync def regex_command(message: discord.Message) -> None:\n";
 foreach my $function (@functions){
   my $str2 = $func2str{$function};
   print FH "    if re.search(${str2}, message.content):\n";

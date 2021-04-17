@@ -1,8 +1,9 @@
-#good_night
-#'おやすみ'
+# good_night
+# 'おやすみ'
 import discord
-import sys
-async def good_night(message:discord.Message)->None:
+
+
+async def good_night(message: discord.Message) -> None:
     await message.add_reaction(chr(0x1F1F4))
     await message.add_reaction(chr(0x1F1FE))
     await message.add_reaction(chr(0x1F1E6))
