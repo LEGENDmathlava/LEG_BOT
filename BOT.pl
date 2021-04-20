@@ -3,6 +3,7 @@ use utf8;
 
 while(true){
   system("clear");
+  system("perl my_commands/LEG_commands/source.pl");
   system("./my_commands/LEG.pl");
   system("./my_commands/in_command.pl");
   system("perl my_commands/regex_command.pl");
