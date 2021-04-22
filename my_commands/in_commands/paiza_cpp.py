@@ -38,4 +38,4 @@ async def paiza_cpp(message: discord.Message) -> None:
     result = response.json()
     print(result)
     if bool(result['stdout']):
-        await message.reply(result['stdout'])
+        await message.reply(result['stdout'][:2000])
