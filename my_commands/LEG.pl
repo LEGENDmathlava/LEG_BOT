@@ -38,3 +38,4 @@ print FH "}\n";
 
 print FH "\n\nasync def LEG(m: List[str], message: discord.Message) -> None:\n    if (len(m) > 1) and (m[1] in commands_dict):\n        await commands_dict[m[1]](m, message)\n";
 close FH;
+print "complete" . __FILE__ ."\n"

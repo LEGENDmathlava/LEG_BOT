@@ -40,3 +40,4 @@ foreach my $function (@functions){
 
 }
 close FH;
+print "complete" . __FILE__ ."\n"

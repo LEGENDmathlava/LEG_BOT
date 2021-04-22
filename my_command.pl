@@ -40,3 +40,4 @@ print FH "}\n";
 
 print FH "\n\nasync def my_command(message: discord.Message) -> None:\n    m = message.content.split()\n    if len(m) == 0:\n        return\n    if m[0] in commands_dict:\n        await commands_dict[m[0]](m, message)\n    await in_command(message)\n    await regex_command(message)\n";
 close FH;
+print "complete" . __FILE__ ."\n"

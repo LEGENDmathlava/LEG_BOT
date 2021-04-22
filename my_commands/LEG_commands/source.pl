@@ -34,3 +34,4 @@ foreach my $function  (@functions) {
 print FH "    'source': 'my_commands/LEG_commands/source.pl',\n";
 print FH "}\n\n\nasync def source(m: List[str], message: discord.Message) -> None:\n    if len(m) == 2 or m[2] not in function2file:\n        await message.channel.send('https://github.com/LEGENDmathlava/LEG_BOT')\n    else:\n        await message.channel.send('https://github.com/LEGENDmathlava/LEG_BOT/blob/master/' + function2file[m[2]])\n";
 close FH;
+print "complete" . __FILE__ ."\n"
