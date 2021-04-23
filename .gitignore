@@ -10,3 +10,4 @@ my_commands/LEG_commands/source.py
 my_commands/LEG_commands/TETRIS_GAME/TETRIS*.txt
 my_commands/LEG_commands/TEST_GAME/TESTGAME*.txt
 .mypy_cache
+log
