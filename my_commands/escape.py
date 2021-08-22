@@ -7,8 +7,7 @@ async def escape(m: List[str], message: discord.Message) -> None:
     if message.author.bot:
         return
     if message.reference:
-        message2 = \
-            await message.channel.fetch_message(message.reference.message_id)
+        message2 = await message.channel.fetch_message(message.reference.message_id)
         s = message2.content
         escape_string = ''
         for ch in s:

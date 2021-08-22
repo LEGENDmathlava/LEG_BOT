@@ -22,7 +22,7 @@ foreach my $command_module_file (@command_module_files){
 @functions = grep {$_ =~ /^(?!.*_command$).*$/} @functions;
 
 open FH, '>', "my_command.py";
-print FH "import discord\nfrom typing import List, Dict, Callable, Coroutine, Any\n";
+print FH "import discord\nimport subprocess\nfrom typing import List, Dict, Callable, Coroutine, Any\n";
 foreach my $command_module_file (@command_module_files){
   my $command_module = $command_module_file;
   $command_module =~ s/\//./g;
@@ -38,6 +38,6 @@ foreach my $function (@functions){
 }
 print FH "}\n";
 
-print FH "\n\nasync def my_command(message: discord.Message) -> None:\n    m = message.content.split()\n    if len(m) == 0:\n        return\n    if m[0] in commands_dict:\n        await commands_dict[m[0]](m, message)\n    await in_command(message)\n    await regex_command(message)\n";
+print FH "\n\nasync def my_command(message: discord.Message) -> None:\n    p = subprocess.Popen(['./perl-lib/discord/mention_to_id.pl'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)\n    out, error = p.communicate(input=message.content.encode('utf-8'))\n    message.content = out.decode('utf-8')\n    m = message.content.split()\n    if len(m) == 0:\n        return\n    if m[0] in commands_dict:\n        await commands_dict[m[0]](m, message)\n    await in_command(message)\n    await regex_command(message)\n";
 close FH;
 print "complete" . __FILE__ ."\n"

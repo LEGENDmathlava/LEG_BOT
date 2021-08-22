@@ -1,5 +1,5 @@
 # brainfuck
-# r'^[><+-.,[\]]+(\n# INPUT\n.*)?$'
+# r'^[><+-.,[\]]+(\n# INPUT\n[\s\S]*)?$'
 
 import discord
 import time
@@ -52,8 +52,8 @@ async def brainfuck(message: discord.Message) -> None:
             brancket_taiou[left] = right
             brancket_taiou[right] = left
     print(brancket_taiou)
-    # for i in range(200):
-    while True:
+    for i in range(500):
+    # while True:
         ch = source[source_ptr]
         if ch == '+':
             if mem_ptr not in mem:
@@ -101,7 +101,7 @@ async def paint(message: discord.Message, embed_message: discord.Message, source
     description = 'running' if flag else 'end'
     for _ in range(100):
         time.sleep(0.01)
-    embed = discord.Embed(title='brainf*ck(無制限モード)', description=description)
+    embed = discord.Embed(title='brainf*ck(500まで)', description=description)
     embed.add_field(name='source_ptr', value=source_ptr)
     embed.add_field(name='mem_ptr', value=mem_ptr)
     embed.add_field(name='step', value=step)

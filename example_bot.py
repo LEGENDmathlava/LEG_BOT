@@ -6,12 +6,18 @@ from typing import Union
 from legbot_unchi import client, TOKEN
 from my_command import my_command
 from reaction_command import reaction_command
+import time
 
 b = False
 
 # メッセージ受信時に動作する処理
 num = random.randrange(100) + 1000
 
+@client.event
+async def on_thread_join(thread: discord.Thread) -> None:
+    await thread.join()
+    if thread.guild.id == 739882359649992714:
+        await thread.send(thread.mention + "Hello!!")
 
 @client.event
 async def on_message(message: discord.Message) -> None:
@@ -40,14 +46,31 @@ async def on_message(message: discord.Message) -> None:
                 await message.channel.send('10分ですね')
 
     await my_command(message)
-    if 'ECHO_FLOWER' not in message.content:
-        f = open('ECHO_FLOWER', mode='w')
+    if 'ECHO_FLOWER' in message.content:
+        time.sleep(1)
+    with open('ECHO_FLOWER', mode='w') as f:
+        f.write('on_message\n')
+        f.write(message.guild.name + '\n' if message.guild is not None else '\n')
+        f.write(message.channel.name + '\n' if type(message.channel) == discord.TextChannel or type(message.channel) == discord.GroupChannel else 'DMchannel\n')
+        f.write(message.author.nick + str(message.author.id) + '\n' if type(message.author) == discord.Member and message.author.nick is not None else message.author.name + str(message.author.id) + '\n')
+        f.write(message.created_at.strftime('%x %X') + '\n')
+        f.write(f'message_id:{message.id}\n')
         f.write(message.content)
+        if message.reference and message.reference.message_id:
+            referenced_message = await message.channel.fetch_message(message.reference.message_id)
+            f.write('\n---- reference ----\n')
+            f.write(referenced_message.content + '\n')
+            f.write('-------------------')
+        if message.attachments:
+            f.write('\n==== attachments ====\n')
+            for attachment in message.attachments:
+                f.write(attachment.url + '\n')
+            f.write('=====================')
         f.close()
 
 
 @client.event
-async def on_raw_reaction_add(payload: discord.RawMessageDeleteEvent) -> None:
+async def on_raw_reaction_add(payload: discord.RawReactionActionEvent) -> None:
     channel = client.get_channel(payload.channel_id)
     message = await channel.fetch_message(payload.message_id)
     emoji = payload.emoji
@@ -58,6 +81,111 @@ async def on_raw_reaction_add(payload: discord.RawMessageDeleteEvent) -> None:
             break
     user = client.get_user(payload.user_id)
     await reaction_command(reaction, user)
+    with open('ECHO_FLOWER', mode='w') as f:
+        f.write('on_raw_reaction_add\n')
+        f.write(message.guild.name + '\n' if message.guild is not None else '\n')
+        f.write(message.channel.name + '\n' if type(message.channel) == discord.TextChannel or type(message.channel) == discord.GroupChannel else 'DMchannel\n')
+        f.write(user.nick + str(user.id) + '\n' if type(user) == discord.Member and user.nick is not None else user.name + str(user.id) + '\n')
+        f.write(message.created_at.strftime('%x %X') + '\n')
+        f.write(f'message_id:{payload.message_id}\n')
+        f.write(emoji.name + '\n')
+        f.write('---- content ----\n')
+        f.write(message.content + '\n')
+        f.write('-----------------')
+        f.close()
+
+
+@client.event
+async def on_raw_reaction_remove(payload: discord.RawReactionActionEvent) -> None:
+    channel = client.get_channel(payload.channel_id)
+    message = await channel.fetch_message(payload.message_id)
+    emoji = payload.emoji
+    user = client.get_user(payload.user_id)
+    with open('ECHO_FLOWER', mode='w') as f:
+        f.write('on_raw_reaction_remove\n')
+        f.write(message.guild.name + '\n' if message.guild is not None else '\n')
+        f.write(message.channel.name + '\n' if type(message.channel) == discord.TextChannel or type(message.channel) == discord.GroupChannel else 'DMchannel\n')
+        f.write(user.nick + str(user.id) + '\n' if type(user) == discord.Member and user.nick is not None else user.name + str(user.id) + '\n')
+        f.write(message.created_at.strftime('%x %X') + '\n')
+        f.write(f'message_id:{payload.message_id}\n')
+        f.write(emoji.name + '\n')
+        f.write('---- content ----\n')
+        f.write(message.content + '\n')
+        f.write('-----------------')
+        f.close()
+
+
+@client.event
+async def on_raw_message_delete(payload: discord.RawMessageDeleteEvent) -> None:
+    if payload.cached_message:
+        deleted_message = payload.cached_message
+        with open('ECHO_FLOWER', mode='w') as f:
+            f.write('on_raw_message_delete\n')
+            f.write(deleted_message.guild.name + '\n' if deleted_message.guild is not None else '\n')
+            f.write(deleted_message.channel.name + '\n' if type(deleted_message.channel) == discord.TextChannel or type(deleted_message.channel) == discord.GroupChannel else 'DMchannel\n')
+            f.write(deleted_message.author.nick + str(deleted_message.author.id) + '\n' if type(deleted_message.author) == discord.Member and deleted_message.author.nick is not None else deleted_message.author.name + str(deleted_message.author.id) + '\n')
+            f.write('不明\n')
+            f.write(f'message_id:{payload.message_id}\n')
+            f.write('---- deleted ----\n')
+            f.write(deleted_message.content + '\n')
+            if deleted_message.attachments:
+                f.write('\n==== attachments ====\n')
+                for attachment in deleted_message.attachments:
+                    f.write(attachment.url + '\n')
+                f.write('=====================\n')
+            f.write('-----------------')
+            f.close()
+    else:
+        guild = client.get_guild(payload.guild_id)
+        channel = client.get_channel(payload.channel_id)
+        with open('ECHO_FLOWER', mode='w') as f:
+            f.write('on_raw_message_delete\n')
+            f.write(guild.name + '\n' if guild is not None else '\n')
+            f.write(channel.name + '\n' if type(channel) == discord.TextChannel or type(channel) == discord.GroupChannel else 'DMchannel\n')
+            f.write('不明\n')
+            f.write('不明\n')
+            f.write(f'message_id:{payload.message_id}\n')
+            f.write('---- deleted ----\n')
+            f.write('-----------------')
+            f.close()
+
+
+@client.event
+async def on_raw_message_edit(payload: discord.RawMessageUpdateEvent) -> None:
+    if payload.cached_message:
+        before_message = payload.cached_message
+        message = await before_message.channel.fetch_message(payload.message_id)
+    else:
+        before_message = None
+        channel = client.get_channel(payload.channel_id)
+        message = await channel.fetch_message(payload.message_id)
+    await my_command(message)
+    if 'ECHO_FLOWER' in message.content:
+        time.sleep(1)
+    with open('ECHO_FLOWER', mode='w') as f:
+        f.write('on_raw_message_edit\n')
+        f.write(message.guild.name + '\n' if message.guild is not None else '\n')
+        f.write(message.channel.name + '\n' if type(message.channel) == discord.TextChannel or type(message.channel) == discord.GroupChannel else '\n')
+        f.write(message.author.nick + str(message.author.id) + '\n' if type(message.author) == discord.Member and message.author.nick is not None else message.author.name + str(message.author.id) + '\n')
+        f.write(message.created_at.strftime('%x %X') + '\n')
+        f.write(f'message_id:{payload.message_id}\n')
+        f.write('---- before ----\n')
+        if before_message:
+            f.write(before_message.content + '\n')
+            if before_message.attachments:
+                f.write('\n==== attachments ====\n')
+                for attachment in before_message.attachments:
+                    f.write(attachment.url + '\n')
+                f.write('=====================\n')
+        f.write('---- after  ----\n')
+        f.write(message.content + '\n')
+        if message.attachments:
+            f.write('\n==== attachments ====\n')
+            for attachment in message.attachments:
+                f.write(attachment.url + '\n')
+            f.write('=====================\n')
+        f.write('----------------')
+        f.close()
 
 
 @client.event
