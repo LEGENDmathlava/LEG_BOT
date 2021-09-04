@@ -68,6 +68,9 @@ async def on_message(message: discord.Message) -> None:
             f.write('=====================')
         f.close()
 
+    from my_commands.LEG_commands.two_one_mult_test import channel_id, kaitous
+    if channel_id == message.channel.id:
+        kaitous[message.author] = message.content
 
 @client.event
 async def on_raw_reaction_add(payload: discord.RawReactionActionEvent) -> None:
